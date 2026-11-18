@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GOF AI 3D Video Studio - Create unlimited 3D cartoon videos with natural Indian AI voices and smooth camera animation.">
+  <title>GOF AI Studio | 3D Cartoon & AI Video Generator</title>
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: #111827;
+      --border: #1f2937;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.35);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
+    header {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .logo span { color: var(--accent); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: 500; transition: 0.2s; }
+    nav a:hover { color: #fff; }
+    .hero { text-align: center; padding: 48px 20px 28px; max-width: 850px; margin: auto; }
+    .badge { display: inline-block; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    .hero h1 { font-size: 34px; font-weight: 800; margin-bottom: 14px; background: linear-gradient(to right, #ffffff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-muted); font-size: 16px; max-width: 650px; margin: auto; }
+    .ad-container { max-width: 960px; margin: 20px auto; padding: 12px; text-align: center; background: #0d1320; border: 1px dashed #263147; border-radius: 10px; color: #4b5563; font-size: 12px; }
+    .studio-wrapper { max-width: 1050px; margin: 20px auto; padding: 0 16px; }
+    .studio-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow); }
+    .studio-header { background: #161f33; padding: 12px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.red { background: #ef4444; } .dot.yellow { background: #f59e0b; } .dot.green { background: #10b981; }
+    iframe { width: 100%; height: 880px; border: none; display: block; background: #0f172a; }
+    .content-section { max-width: 960px; margin: 50px auto; padding: 0 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); padding: 22px; border-radius: 14px; }
+    .card h3 { color: #fff; font-size: 18px; margin-bottom: 10px; }
+    .card p { color: var(--text-muted); font-size: 14px; }
+    .legal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-top: 30px; }
+    .legal-box h2 { font-size: 20px; margin-bottom: 12px; color: #e5e7eb; }
+    .legal-box p { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
+    footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); margin-top: 60px; color: var(--text-muted); font-size: 13px; }
+    @media (max-width: 600px) { .hero h1 { font-size: 26px; } nav { display: none; } iframe { height: 960px; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🎬 GOF <span>AI Studio</span></div>
+    <nav>
+      <a href="#studio">Video Studio</a>
+      <a href="#guide">How to Use</a>
+      <a href="#about">About</a>
+      <a href="#privacy">Privacy Policy</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">✨ Next-Gen 3D Cartoon & Voice Generator</div>
+    <h1>Create Talking 3D Cartoon Videos in Seconds</h1>
+    <p>Generate high-resolution 3D animated scenes paired with natural Indian AI voices (Rohan, Vikram, Kabir, Ananya) and smooth camera motion — ready for Reels, Shorts & YouTube.</p>
+  </section>
+
+  <div class="ad-container">
+    Advertisement Space (728x90 / Responsive)
+  </div>
+
+  <section id="studio" class="studio-wrapper">
+    <div class="studio-box">
+      <div class="studio-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span style="margin-left: 8px;">GOF Engine v2.0 — Live Cloud Renderer</span>
+      </div>
+      <iframe 
+        src="https://YOUR_GRADIO_LINK_HERE.gradio.live" 
+        allow="microphone; autoplay; clipboard-write" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <div class="ad-container">
+    Advertisement Space (Responsive Display Ad)
+  </div>
+
+  <section id="guide" class="content-section">
+    <h2 style="font-size: 24px; text-align: center; margin-bottom: 8px;">How to Generate 3D Cartoon Videos</h2>
+    <p style="text-align: center; color: var(--text-muted); font-size: 15px;">Follow three simple steps to produce watermark-free vertical or horizontal videos.</p>
+    
+    <div class="grid">
+      <div class="card">
+        <h3>1. Describe Your 3D Scene</h3>
+        <p>Write a clear visual prompt describing your 3D character, outfit, expression, and background environment in English for sharp rendering.</p>
+      </div>
+      <div class="card">
+        <h3>2. Choose Voice & Dialogue</h3>
+        <p>Enter your script in Hindi, Hinglish, or English and pick a custom vocal profile like Rohan, Vikram, or Ananya to match your character.</p>
+      </div>
+      <div class="card">
+        <h3>3. Select Ratio & Render</h3>
+        <p>Pick 9:16 for Reels/Shorts or 16:9 for YouTube, apply smooth camera zoom motion, and download your final MP4 video directly.</p>
+      </div>
+    </div>
+
+    <div id="about" class="legal-box">
+      <h2>About GOF AI Studio</h2>
+      <p>GOF AI Studio is an independent web-based creative suite built for digital storytellers, educators, and short-form video creators. Our platform simplifies 3D scene rendering, neural voice synthesis, and automated video composition inside a single browser workspace.</p>
+    </div>
+
+    <div id="privacy" class="legal-box">
+      <h2>Privacy Policy & Terms</h2>
+      <p>We respect creator privacy. Prompts and scripts entered into GOF AI Studio are processed transiently to generate your requested audio and video files and are not permanently sold to third parties. Third-party advertising partners such as Google AdSense may use cookies to serve relevant ads based on user visits.</p>
+      <p><strong>Contact:</strong> support@gofaistudio.com</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 GOF AI Studio. All Rights Reserved. | Built for Creators.
+  </footer>
+
+</body>
+</html>
