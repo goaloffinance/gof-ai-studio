@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GOF AI 3D Video Studio - Create unlimited 3D cartoon videos with natural Indian AI voices and smooth camera animation.">
-  <title>GOF AI Studio | 3D Cartoon & AI Video Generator</title>
+  <meta name="description" content="GOF AI 3D Video Studio - Create unlimited 3D cartoon talking videos with Indian AI voices and smooth camera animation.">
+  <title>GOF AI Studio | 3D Cartoon & Talking Video Generator</title>
   <style>
     :root {
       --bg-main: #090d16;
       --bg-card: #111827;
+      --bg-input: #0b1120;
       --border: #1f2937;
       --accent: #3b82f6;
+      --accent-hover: #2563eb;
       --accent-glow: rgba(59, 130, 246, 0.35);
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
+      --success: #10b981;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
     header {
-      background: rgba(17, 24, 39, 0.85);
+      background: rgba(17, 24, 39, 0.88);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 16px 24px;
@@ -33,54 +36,111 @@
     .logo span { color: var(--accent); }
     nav a { color: var(--text-muted); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: 500; transition: 0.2s; }
     nav a:hover { color: #fff; }
-    .hero { text-align: center; padding: 48px 20px 28px; max-width: 850px; margin: auto; }
-    .badge { display: inline-block; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    .hero { text-align: center; padding: 44px 20px 24px; max-width: 850px; margin: auto; }
+    .badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
     .hero h1 { font-size: 34px; font-weight: 800; margin-bottom: 14px; background: linear-gradient(to right, #ffffff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { color: var(--text-muted); font-size: 16px; max-width: 650px; margin: auto; }
+    .hero p { color: var(--text-muted); font-size: 16px; max-width: 660px; margin: auto; }
     .ad-container { max-width: 960px; margin: 20px auto; padding: 12px; text-align: center; background: #0d1320; border: 1px dashed #263147; border-radius: 10px; color: #4b5563; font-size: 12px; }
-    .studio-wrapper { max-width: 1050px; margin: 20px auto; padding: 0 16px; }
+    
+    .studio-wrapper { max-width: 1080px; margin: 20px auto; padding: 0 16px; }
     .studio-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow); }
     .studio-header {
       background: #161f33;
-      padding: 12px 16px;
+      padding: 12px 18px;
       border-bottom: 1px solid var(--border);
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
       font-size: 13px;
       color: var(--text-muted);
     }
     .header-left { display: flex; align-items: center; gap: 8px; }
     .dot { width: 10px; height: 10px; border-radius: 50%; }
     .dot.red { background: #ef4444; } .dot.yellow { background: #f59e0b; } .dot.green { background: #10b981; }
-    .connector-bar { display: flex; align-items: center; gap: 8px; flex: 1; max-width: 480px; }
-    .connector-bar input {
-      flex: 1;
-      background: #0b1120;
-      border: 1px solid #334155;
+    .live-pill { background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+
+    .studio-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; padding: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #e5e7eb; margin-bottom: 6px; }
+    .form-group small { display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    textarea, select, input[type="file"] {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid #2d3748;
       color: #f3f4f6;
-      padding: 7px 12px;
-      border-radius: 8px;
-      font-size: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 14px;
       outline: none;
-    }
-    .connector-bar input:focus { border-color: var(--accent); }
-    .connector-bar button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
       transition: 0.2s;
     }
-    .connector-bar button:hover { background: #2563eb; }
-    iframe { width: 100%; height: 920px; border: none; display: block; background: #0f172a; }
+    textarea:focus, select:focus { border-color: var(--accent); }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+      transition: 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-1px); background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .preview-panel {
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .canvas-stage {
+      width: 100%;
+      max-width: 340px;
+      background: #050811;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #263147;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas, video { width: 100%; height: auto; display: block; border-radius: 10px; }
+    .status-bar {
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px 12px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #93c5fd;
+      text-align: center;
+    }
+    .btn-download {
+      display: none;
+      width: 100%;
+      margin-top: 12px;
+      background: #10b981;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .btn-download:hover { background: #059669; }
+
     .content-section { max-width: 960px; margin: 50px auto; padding: 0 20px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; }
     .card { background: var(--bg-card); border: 1px solid var(--border); padding: 22px; border-radius: 14px; }
@@ -90,11 +150,10 @@
     .legal-box h2 { font-size: 20px; margin-bottom: 12px; color: #e5e7eb; }
     .legal-box p { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
     footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); margin-top: 60px; color: var(--text-muted); font-size: 13px; }
-    @media (max-width: 600px) {
+    @media (max-width: 820px) {
+      .studio-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 26px; }
       nav { display: none; }
-      iframe { height: 1020px; }
-      .connector-bar { max-width: 100%; width: 100%; }
     }
   </style>
 </head>
@@ -111,9 +170,9 @@
   </header>
 
   <section class="hero">
-    <div class="badge">✨ Next-Gen 3D Cartoon & Voice Generator</div>
+    <div class="badge">⚡ 100% Serverless In-Browser 3D Video & Voice Studio</div>
     <h1>Create Talking 3D Cartoon Videos in Seconds</h1>
-    <p>Generate high-resolution 3D animated scenes paired with natural Indian AI voices (Aarav, Arjun, Aditya, Dadaji, Kavya, Meera) and smooth camera motion — ready for Reels, Shorts & YouTube.</p>
+    <p>Generate watermark-free 720p 3D animated videos from a text prompt or reference image — paired with natural Indian AI voices, expressive talking motion, and direct video download.</p>
   </section>
 
   <div class="ad-container">
@@ -125,19 +184,92 @@
       <div class="studio-header">
         <div class="header-left">
           <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          <span id="engineStatus" style="margin-left: 6px;">GOF Engine v2.0 — Live Cloud Renderer</span>
+          <span style="margin-left: 6px; font-weight: 600; color: #e5e7eb;">GOF Native Engine v3.0</span>
         </div>
-        <div class="connector-bar">
-          <input type="url" id="colabUrlInput" placeholder="Paste new Colab gradio.live URL here..." />
-          <button type="button" onclick="connectGpuEngine()">Connect GPU</button>
+        <span class="live-pill">● 24/7 Online — Zero Quota Limits</span>
+      </div>
+
+      <div class="studio-grid">
+        <!-- Left Controls -->
+        <div>
+          <div class="form-group">
+            <label>1. Scene Visual Prompt (Required if no Reference Image is uploaded)</label>
+            <textarea id="scenePrompt" rows="3" placeholder="e.g., Realistic 3D cinematic brown monkey in yellow t-shirt talking to orange fox in green jacket in a sunny jungle market"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>2. Spoken Dialogue Script (Only what the character speaks)</label>
+            <textarea id="dialogueScript" rows="2" placeholder="e.g., अरे लोमड़ी भाई, अब गरीबी से जीना बहुत हुआ! मैं भी अपना बिज़नेस शुरू करूँगा!"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>3. Reference Character Image (Optional — Leave empty for Text-to-Video)</label>
+            <input type="file" id="refImageInput" accept="image/*">
+            <small>Upload a photo/character image to animate it directly, or leave empty to generate a new 3D scene from your prompt.</small>
+          </div>
+
+          <div class="row-2">
+            <div class="form-group">
+              <label>Language</label>
+              <select id="langSelect" onchange="populateCharacters()">
+                <option value="hi" selected>Hindi</option>
+                <option value="bho">Bhojpuri</option>
+                <option value="en">English</option>
+                <option value="bn">Bengali</option>
+                <option value="mr">Marathi</option>
+                <option value="gu">Gujarati</option>
+                <option value="ta">Tamil</option>
+                <option value="te">Telugu</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <select id="genderSelect" onchange="populateCharacters()">
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Character Voice & Age Profile</label>
+            <select id="charSelect"></select>
+          </div>
+
+          <div class="row-2">
+            <div class="form-group">
+              <label>Voice Style</label>
+              <select id="styleSelect">
+                <option value="energetic" selected>Energetic & Expressive</option>
+                <option value="humorous">Humorous & Playful</option>
+                <option value="serious">Serious & Deep</option>
+                <option value="calm">Calm & Storytelling</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Aspect Ratio</label>
+              <select id="ratioSelect">
+                <option value="9:16" selected>9:16 (Reels / Shorts)</option>
+                <option value="16:9">16:9 (YouTube)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="generateBtn" class="btn-primary" onclick="startVideoGeneration()">
+            🎬 Generate 720p Watermark-Free Video
+          </button>
+        </div>
+
+        <!-- Right Output Stage -->
+        <div class="preview-panel">
+          <div class="canvas-stage" id="stageContainer">
+            <canvas id="renderCanvas" width="720" height="1280"></canvas>
+            <video id="outputVideo" controls playsinline style="display:none;"></video>
+          </div>
+          <div class="status-bar" id="statusText">Ready — Enter prompt or upload image & click Generate.</div>
+          <a id="downloadLink" class="btn-download" download="gof-ai-studio-720p.webm">⬇ Download 720p Video</a>
         </div>
       </div>
-      <iframe 
-        id="studioFrame"
-        src="https://0f9d71c3fb9fdc0ef3.gradio.live/" 
-        allow="microphone; autoplay; clipboard-write" 
-        loading="lazy">
-      </iframe>
     </div>
   </section>
 
@@ -159,8 +291,8 @@
         <p>Enter your spoken dialogue in Hindi, Bhojpuri, English, or regional Indian languages and pick a custom multi-age character voice.</p>
       </div>
       <div class="card">
-        <h3>3. Select Ratio & Render</h3>
-        <p>Pick 9:16 for Reels/Shorts or 16:9 for YouTube, apply smooth camera zoom motion, and download your final 720p MP4 video directly.</p>
+        <h3>3. Select Ratio & Download</h3>
+        <p>Pick 9:16 for Reels/Shorts or 16:9 for YouTube, render talking motion with camera zoom, and download your watermark-free video.</p>
       </div>
     </div>
 
@@ -181,33 +313,259 @@
   </footer>
 
   <script>
-    const STORAGE_KEY = 'gof_studio_gpu_url';
-    const frame = document.getElementById('studioFrame');
-    const urlInput = document.getElementById('colabUrlInput');
-    const statusLabel = document.getElementById('engineStatus');
+    const CHARACTER_PROFILES = {
+      Male: [
+        { name: "Aarav — Playful Kid (9 yrs)", pitch: 1.38, rate: 1.08 },
+        { name: "Rohan — Innocent Kid (11 yrs)", pitch: 1.24, rate: 1.04 },
+        { name: "Arjun — Energetic Youth (24 yrs)", pitch: 1.05, rate: 1.04 },
+        { name: "Kunal — Calm & Smooth Youth (27 yrs)", pitch: 0.98, rate: 1.00 },
+        { name: "Aditya — Deep & Authoritative Adult (40 yrs)", pitch: 0.86, rate: 0.96 },
+        { name: "Vikram — Mature Storyteller Adult (44 yrs)", pitch: 0.82, rate: 0.93 },
+        { name: "Dadaji — Wise & Heavy Elder (68 yrs)", pitch: 0.72, rate: 0.85 },
+        { name: "Masterji — Gentle Senior (63 yrs)", pitch: 0.77, rate: 0.89 }
+      ],
+      Female: [
+        { name: "Pihu — Bubbly Kid (9 yrs)", pitch: 1.42, rate: 1.08 },
+        { name: "Chhutki — Sweet Kid (11 yrs)", pitch: 1.28, rate: 1.04 },
+        { name: "Kavya — Vibrant Youth (23 yrs)", pitch: 1.08, rate: 1.04 },
+        { name: "Ananya — Expressive Youth (26 yrs)", pitch: 1.02, rate: 1.00 },
+        { name: "Meera — Confident Adult (38 yrs)", pitch: 0.92, rate: 0.97 },
+        { name: "Sunita — Warm Adult (43 yrs)", pitch: 0.88, rate: 0.94 },
+        { name: "Dadiji — Affectionate Elder (67 yrs)", pitch: 0.78, rate: 0.86 },
+        { name: "Savitri — Dignified Senior (62 yrs)", pitch: 0.83, rate: 0.90 }
+      ]
+    };
 
-    // Load previously saved Colab URL automatically on page open
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedUrl = localStorage.getItem(STORAGE_KEY);
-      if (savedUrl) {
-        urlInput.value = savedUrl;
-        frame.src = savedUrl;
-        statusLabel.textContent = 'GOF Engine v2.0 — Connected';
+    const LANG_CODES = {
+      hi: "hi-IN",
+      bho: "hi-IN",
+      en: "en-IN",
+      bn: "bn-IN",
+      mr: "mr-IN",
+      gu: "gu-IN",
+      ta: "ta-IN",
+      te: "te-IN"
+    };
+
+    function populateCharacters() {
+      const gender = document.getElementById("genderSelect").value;
+      const charSelect = document.getElementById("charSelect");
+      const list = CHARACTER_PROFILES[gender] || CHARACTER_PROFILES.Male;
+      charSelect.innerHTML = "";
+      list.forEach((item, idx) => {
+        const opt = document.createElement("option");
+        opt.value = idx;
+        opt.textContent = item.name;
+        if (idx === 2) opt.selected = true;
+        charSelect.appendChild(opt);
+      });
+    }
+
+    // Draw initial welcome canvas
+    window.addEventListener("DOMContentLoaded", () => {
+      populateCharacters();
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
       }
+      const canvas = document.getElementById("renderCanvas");
+      const ctx = canvas.getContext("2d");
+      const grad = ctx.createLinearGradient(0, 0, 720, 1280);
+      grad.addColorStop(0, "#0f172a");
+      grad.addColorStop(1, "#1e293b");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 720, 1280);
+      ctx.fillStyle = "#60a5fa";
+      ctx.font = "bold 34px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("GOF AI 3D Studio", 360, 600);
+      ctx.fillStyle = "#9ca3af";
+      ctx.font = "22px sans-serif";
+      ctx.fillText("720p Watermark-Free Preview Stage", 360, 645);
     });
 
-    function connectGpuEngine() {
-      let rawUrl = urlInput.value.trim();
-      if (!rawUrl) return;
-      if (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) {
-        rawUrl = 'https://' + rawUrl;
+    function loadImageElement(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error("Could not load scene image. Please try again."));
+        img.src = src;
+      });
+    }
+
+    function fileToDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function startVideoGeneration() {
+      const prompt = document.getElementById("scenePrompt").value.trim();
+      const dialogue = document.getElementById("dialogueScript").value.trim();
+      const refFile = document.getElementById("refImageInput").files[0];
+      const langKey = document.getElementById("langSelect").value;
+      const gender = document.getElementById("genderSelect").value;
+      const charIdx = parseInt(document.getElementById("charSelect").value, 10) || 0;
+      const style = document.getElementById("styleSelect").value;
+      const ratio = document.getElementById("ratioSelect").value;
+
+      const btn = document.getElementById("generateBtn");
+      const status = document.getElementById("statusText");
+      const canvas = document.getElementById("renderCanvas");
+      const videoEl = document.getElementById("outputVideo");
+      const dlLink = document.getElementById("downloadLink");
+
+      if (!dialogue) {
+        status.textContent = "⚠️ Please enter the Spoken Dialogue Script first.";
+        return;
       }
-      if (!rawUrl.endsWith('/')) {
-        rawUrl += '/';
+      if (!refFile && !prompt) {
+        status.textContent = "⚠️ Enter a Scene Visual Prompt OR upload a Reference Image.";
+        return;
       }
-      localStorage.setItem(STORAGE_KEY, rawUrl);
-      frame.src = rawUrl;
-      statusLabel.textContent = 'GOF Engine v2.0 — Connected';
+
+      btn.disabled = true;
+      dlLink.style.display = "none";
+      videoEl.style.display = "none";
+      canvas.style.display = "block";
+
+      const isVertical = ratio === "9:16";
+      const W = isVertical ? 720 : 1280;
+      const H = isVertical ? 1280 : 720;
+      canvas.width = W;
+      canvas.height = H;
+      document.getElementById("stageContainer").style.maxWidth = isVertical ? "340px" : "100%";
+
+      try {
+        let imgSrc = "";
+        if (refFile) {
+          status.textContent = "1/3 Loading Reference Character Image...";
+          imgSrc = await fileToDataURL(refFile);
+        } else {
+          status.textContent = "1/3 Generating 3D Cinematic Scene from Prompt...";
+          const fullPrompt = `${prompt}, realistic 3D cinematic Pixar-style film render, detailed fur and textures, expressive character face, rich studio lighting, ultra sharp, no text, no watermark`;
+          const seed = Math.floor(Math.random() * 999999);
+          imgSrc = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${W}&height=${H}&nologo=true&seed=${seed}`;
+        }
+
+        const sceneImg = await loadImageElement(imgSrc);
+        status.textContent = "2/3 Synthesizing Character Voice & Talking Motion...";
+
+        const profile = (CHARACTER_PROFILES[gender] || CHARACTER_PROFILES.Male)[charIdx];
+        let pitch = profile.pitch;
+        let rate = profile.rate;
+        if (style === "humorous") rate *= 1.07;
+        if (style === "calm") rate *= 0.92;
+        if (style === "serious") pitch *= 0.94;
+
+        // Calculate natural speaking duration
+        const wordCount = dialogue.split(/\s+/).filter(Boolean).length;
+        const estimatedSec = Math.max(3.0, Math.min(25.0, (wordCount * 0.48) / rate + 0.8));
+
+        // Setup Canvas Recorder
+        const stream = canvas.captureStream(30);
+        const mimeType = MediaRecorder.isTypeSupported("video/webm;codecs=vp9")
+          ? "video/webm;codecs=vp9"
+          : "video/webm";
+        const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 4500000 });
+        const chunks = [];
+        recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+
+        const recordingDone = new Promise((resolve) => {
+          recorder.onstop = () => {
+            const blob = new Blob(chunks, { type: mimeType });
+            resolve(URL.createObjectURL(blob));
+          };
+        });
+
+        // Trigger Speech Synthesis
+        let speechFinished = false;
+        let syllablePulse = 0;
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(dialogue);
+          utter.lang = LANG_CODES[langKey] || "hi-IN";
+          utter.pitch = Math.max(0.5, Math.min(2.0, pitch));
+          utter.rate = Math.max(0.6, Math.min(1.6, rate));
+
+          const voices = window.speechSynthesis.getVoices();
+          const langPrefix = (LANG_CODES[langKey] || "hi-IN").split("-")[0];
+          const matchedVoice = voices.find(v => v.lang.toLowerCase().includes(langPrefix) && (gender === "Female" ? /female|swara|neerja|woman|girl|heera|kalpana/i.test(v.name) : /male|prabhat|hemant|ravi|man|boy/i.test(v.name)))
+            || voices.find(v => v.lang.toLowerCase().includes(langPrefix));
+          if (matchedVoice) utter.voice = matchedVoice;
+
+          utter.onboundary = () => { syllablePulse = 1.0; };
+          utter.onend = () => { speechFinished = true; };
+          utter.onerror = () => { speechFinished = true; };
+          window.speechSynthesis.speak(utter);
+        }
+
+        recorder.start();
+        const ctx = canvas.getContext("2d");
+        const startTime = performance.now();
+        const maxDurationMs = estimatedSec * 1000;
+
+        // Cover-fit calculation
+        const imgRatio = sceneImg.width / sceneImg.height;
+        const canvasRatio = W / H;
+        let baseDrawW, baseDrawH;
+        if (imgRatio > canvasRatio) {
+          baseDrawH = H;
+          baseDrawW = H * imgRatio;
+        } else {
+          baseDrawW = W;
+          baseDrawH = W / imgRatio;
+        }
+
+        function renderLoop(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(1, elapsed / maxDurationMs);
+
+          // Decay syllable pulse smoothly and blend rhythmic speech cadence
+          syllablePulse *= 0.82;
+          const cadence = speechFinished ? 0 : Math.abs(Math.sin(elapsed * 0.022)) * 0.65 + syllablePulse * 0.35;
+
+          // Smooth cinematic camera push + subtle expressive talking head/body bounce
+          const zoom = 1.0 + progress * 0.10 + cadence * 0.012;
+          const bobY = speechFinished ? 0 : Math.sin(elapsed * 0.018) * (3.5 * cadence);
+          const tiltAngle = speechFinished ? 0 : Math.sin(elapsed * 0.006) * 0.008;
+
+          ctx.save();
+          ctx.fillStyle = "#050811";
+          ctx.fillRect(0, 0, W, H);
+          ctx.translate(W / 2, H / 2 + bobY);
+          ctx.rotate(tiltAngle);
+          ctx.scale(zoom, zoom);
+          ctx.drawImage(sceneImg, -baseDrawW / 2, -baseDrawH / 2, baseDrawW, baseDrawH);
+          ctx.restore();
+
+          status.textContent = `3/3 Rendering 720p HD Video... ${Math.round(progress * 100)}%`;
+
+          if (elapsed < maxDurationMs && (!speechFinished || elapsed < 2500)) {
+            requestAnimationFrame(renderLoop);
+          } else {
+            recorder.stop();
+          }
+        }
+
+        requestAnimationFrame(renderLoop);
+        const videoUrl = await recordingDone;
+
+        canvas.style.display = "none";
+        videoEl.src = videoUrl;
+        videoEl.style.display = "block";
+        dlLink.href = videoUrl;
+        dlLink.style.display = "block";
+        status.textContent = `✅ Ready! 720p Watermark-Free Video (${profile.name})`;
+      } catch (err) {
+        status.textContent = `❌ Error: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+      }
     }
   </script>
 
